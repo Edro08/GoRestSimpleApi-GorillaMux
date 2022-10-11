@@ -1,7 +1,7 @@
 package main
 
 import (
-	"GoRestSimpleApi/cmd/bootstrap"
+	"GoRestSimpleApiLimpio/cmd/bootstrap"
 	"log"
 
 	_ "github.com/go-sql-driver/mysql"
