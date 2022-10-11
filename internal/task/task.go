@@ -1,7 +1,6 @@
 package task
 
 import (
-	"context"
 	"errors"
 	"strconv"
 )
@@ -101,23 +100,6 @@ func (name Name) String() string {
 
 func (content Content) String() string {
 	return content.value
-}
-
-//Interface para guardar course
-type TaskSaveRepository interface {
-	Save(ctx context.Context, task Task) error
-}
-
-type TaskUpdateRepository interface {
-	Update(ctx context.Context, task Task) error
-}
-
-type TaskDeleteRepository interface {
-	Delete(ctx context.Context, Id string) error
-}
-
-type TaskGetAllRepository interface {
-	ReadAll(ctx context.Context) ([]TaskDB, error)
 }
 
 type TaskGetIdRepository interface {

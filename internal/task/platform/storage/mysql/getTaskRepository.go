@@ -1,7 +1,7 @@
 package mysql
 
 import (
-	"GoRestSimpleApi/internal/task"
+	"GoRestSimpleApiLimpio/internal/task"
 )
 
 func (r TaskRepository) ReadID(Id string) ([]task.TaskDB, error) {

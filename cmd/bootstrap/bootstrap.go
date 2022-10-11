@@ -1,11 +1,11 @@
 package bootstrap
 
 import (
-	"GoRestSimpleApi/internal/task/platform/server/handler"
-	"GoRestSimpleApi/internal/task/platform/storage/mysql"
-	"GoRestSimpleApi/internal/task/read"
-	"GoRestSimpleApi/kit/platform/server"
-	"GoRestSimpleApi/kit/platform/storage"
+	"GoRestSimpleApiLimpio/internal/task/platform/server/handler"
+	"GoRestSimpleApiLimpio/internal/task/platform/storage/mysql"
+	"GoRestSimpleApiLimpio/internal/task/read"
+	"GoRestSimpleApiLimpio/kit/platform/server"
+	"GoRestSimpleApiLimpio/kit/platform/storage"
 	"net/http"
 )
 
