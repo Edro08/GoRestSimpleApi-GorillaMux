@@ -2,39 +2,35 @@ package handler
 
 import (
 	"GoRestSimpleApi/internal/task/read"
+	"encoding/json"
+	"fmt"
 	"net/http"
-
-	"github.com/gin-gonic/gin"
 )
 
-func TaskReadAllHandler(taskGetAllService read.TaskGetAllService) gin.HandlerFunc {
+//Task Get ID
+type TaskGetIdHandler struct {
+	taskGetIdService read.TaskGetIdService
+}
 
-	return func(ctx *gin.Context) {
-
-		tasks, err := taskGetAllService.ReadAll(ctx)
-
-		if err != nil {
-			ctx.JSON(http.StatusInternalServerError, err.Error())
-		} else {
-			ctx.JSON(http.StatusOK, tasks)
-		}
+func NewTaskHandlerID(taskGetIdService read.TaskGetIdService) TaskGetIdHandler {
+	return TaskGetIdHandler{
+		taskGetIdService: taskGetIdService,
 	}
 }
 
-func TaskReadIDHandler(taskGetIdService read.TaskGetIdService) gin.HandlerFunc {
+func (taskGetIdHandler TaskGetIdHandler) TaskReadIDHandler(w http.ResponseWriter, req *http.Request) {
+	Id := req.URL.Query().Get("Id")
 
-	return func(ctx *gin.Context) {
-		req := TaskIDRequest{}
-		if err := ctx.ShouldBindJSON(&req); err != nil {
-			ctx.JSON(http.StatusBadRequest, err.Error())
-		} else {
-
-			tasks, err := taskGetIdService.ReadID(ctx, req.Id)
-			if err != nil {
-				ctx.JSON(http.StatusInternalServerError, err)
-			} else {
-				ctx.JSON(http.StatusOK, tasks)
-			}
-		}
+	if Id == "" {
+		fmt.Fprintf(w, "Account number is missing!")
+		return
 	}
+
+	tasks, err := taskGetIdHandler.taskGetIdService.ReadID(Id)
+	if err != nil {
+		fmt.Fprintf(w, "Error: "+err.Error())
+	} else {
+		json.NewEncoder(w).Encode(tasks)
+	}
+	return
 }

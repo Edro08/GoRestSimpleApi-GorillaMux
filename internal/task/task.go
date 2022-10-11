@@ -121,7 +121,7 @@ type TaskGetAllRepository interface {
 }
 
 type TaskGetIdRepository interface {
-	ReadID(ctx context.Context, Id string) ([]TaskDB, error)
+	ReadID(Id string) ([]TaskDB, error)
 }
 
 type TaskDB struct {

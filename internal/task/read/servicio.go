@@ -33,7 +33,7 @@ func NewTaskServiceID(TaskRepository Task.TaskGetIdRepository) TaskGetIdService 
 	}
 }
 
-func (s TaskGetIdService) ReadID(ctx context.Context, Id string) ([]task.TaskDB, error) {
+func (s TaskGetIdService) ReadID(Id string) ([]task.TaskDB, error) {
 
-	return s.taskRepository.ReadID(ctx, Id)
+	return s.taskRepository.ReadID(Id)
 }
