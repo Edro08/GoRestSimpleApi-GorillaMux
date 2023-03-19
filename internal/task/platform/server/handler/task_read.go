@@ -34,3 +34,20 @@ func (taskGetIdHandler TaskGetIdHandler) TaskReadIDHandler(w http.ResponseWriter
 	}
 	return
 }
+
+func (taskGetIdHandler TaskGetIdHandler) TaskReadIDHandlerMux(w http.ResponseWriter, req *http.Request) {
+	Id := req.URL.Query().Get("Id")
+
+	if Id == "" {
+		fmt.Fprintf(w, "Account number is missing!")
+		return
+	}
+
+	tasks, err := taskGetIdHandler.taskGetIdService.ReadID(Id)
+	if err != nil {
+		fmt.Fprintf(w, "Error: "+err.Error())
+	} else {
+		json.NewEncoder(w).Encode(tasks)
+	}
+	return
+}

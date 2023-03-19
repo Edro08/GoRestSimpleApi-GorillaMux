@@ -7,6 +7,8 @@ import (
 	"GoRestSimpleApiLimpio/kit/platform/server"
 	"GoRestSimpleApiLimpio/kit/platform/storage"
 	"net/http"
+
+	"github.com/gorilla/mux"
 )
 
 func Run() error {
@@ -22,7 +24,8 @@ func Run() error {
 	taskGetIdService := read.NewTaskServiceID(taskRepository)
 	taskGetIdHandler := handler.NewTaskHandlerID(taskGetIdService)
 
+	router := mux.NewRouter().StrictSlash(true)
+	router.HandleFunc("/getIdtaskmux", taskGetIdHandler.TaskReadIDHandlerMux).Methods("GET")
 	http.HandleFunc("/getIdtask", taskGetIdHandler.TaskReadIDHandler)
-
 	return server.ServerRun()
 }
